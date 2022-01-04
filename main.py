@@ -65,7 +65,6 @@ class VkUser:
                 file.write(picture.content)
         with open(f'VKCloud/info.json', 'w') as file:
             json.dump(result_file, file)
-        pprint(result_file)
         return result_file
 
 

@@ -12,18 +12,19 @@ class VkUser:
             'access_token': token,
             'v': version
         }
+
     def get_photos(self):
         get_photos_url = self.url + 'photos.get'
         get_photos_params = {
-            'owner_id': 'begemot_korovin',
             'album_id': 'profile',
             'extended': '1'
         }
         res = requests.get(get_photos_url, params={**self.params, **get_photos_params}).json()
         pprint(res)
 
-Kostya = VkUser(token)
-Kostya.get_photos()
+
+NewUser = VkUser(token)
+NewUser.get_photos()
 
 
 

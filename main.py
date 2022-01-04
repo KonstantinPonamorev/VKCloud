@@ -107,6 +107,7 @@ class YaUploader:
         bar.finish()
 
 
+
 if __name__ == '__main__':
     token = input('Введите ваш Token: ')
     owner_id = str(input('Введите ID пользователя: '))

@@ -3,6 +3,8 @@ import json
 from datetime import datetime
 from pprint import pprint
 import os
+import time
+from progress.bar import IncrementalBar
 
 
 class VkUser:
@@ -97,9 +99,12 @@ class YaUploader:
 
     def multiple_upload(self, files):
         self.put_new_folder('VKCloud')
+        bar = IncrementalBar('Countdown', max=len(files))
         for file in files:
             self.upload(f'VKCloud/{file["file_name"]}')
-
+            bar.next()
+            time.sleep(0.33)
+        bar.finish()
 
 
 if __name__ == '__main__':

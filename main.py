@@ -41,10 +41,10 @@ class VkUser:
         photos_info = self.sort_photos_info()
         result_file = {}
         for photo in photos_info:
-            pprint(photo['likes'])
-        #     if photo['likes'] not in result_file:
-        #         result_file[f'{photo["likes"]}'] = f'{photo[size][0]}x{photo[size][1]}'
-        # return result_file
+            pprint(str(photo['likes']))
+            if photo['likes'] not in result_file:
+                result_file[f'{photo["likes"]}'] = f'{photo[size][0]}x{photo[size][1]}'
+        return result_file
 
 
 

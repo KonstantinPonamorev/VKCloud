@@ -12,7 +12,7 @@ class YaUploader:
     def get_upload_link(self, file):
         upload_url = "https://cloud-api.yandex.net/v1/disk/resources/upload"
         headers = self.get_headers()
-        params = {"path": f"/VkCloud/{file}", "overwrite": "true"}
+        params = {"path": file, "overwrite": "true"}
         response = requests.get(upload_url, headers=headers, params=params)
         return response.json()
 

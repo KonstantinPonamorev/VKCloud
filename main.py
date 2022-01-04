@@ -3,6 +3,7 @@ import json
 import time
 from datetime import datetime
 from pprint import pprint
+import os
 
 with open('token.txt', 'r') as file:
     token = file.read().strip()
@@ -38,20 +39,39 @@ class VkUser:
         return photos_info
 
     def download_photos(self):
+        result_dict = {}
+        result_file = []
         photos_info = self.sort_photos_info()
-        result_file = {}
         for photo in photos_info:
-            pprint(str(photo['likes']))
-            if photo['likes'] not in result_file:
-                result_file[f'{photo["likes"]}'] = f'{photo[size][0]}x{photo[size][1]}'
-        return result_file
-
+            if photos_info[photo]['likes'] not in result_dict:
+                result_dict[f'{photos_info[photo]["likes"]}'] = \
+                    f'{photos_info[photo]["size"][0]}x{photos_info[photo]["size"][1]}'
+                file_name = f'{photos_info[photo]["likes"]}.jpg'
+                result_file.append({
+                    'file_name': file_name,
+                    'size': f'{photos_info[photo]["size"][0]}x{photos_info[photo]["size"][1]}'
+                })
+            else:
+                file_name = f'{photos_info[photo]["likes"]}-{photos_info[photo]["date"]}.jpg'
+                result_file.append({
+                    'file_name': file_name,
+                    'size': f'{photos_info[photo]["size"][0]}x{photos_info[photo]["size"][1]}'
+                })
+            with open(f'VKCloud/{file_name}', "wb") as file:
+                download_url = photos_info[photo]['url']
+                picture = requests.get(download_url)
+                file.write(picture.content)
+        with open(f'VKCloud/info.json', 'w') as file:
+            json.dump(result_file, file)
 
 
 NewUser = VkUser(token)
+
 info = NewUser.sort_photos_info()
+pprint(info)
+
 NewUser.download_photos()
-# pprint(info)
+
 
 
 

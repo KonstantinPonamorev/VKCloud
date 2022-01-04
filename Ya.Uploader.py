@@ -16,6 +16,10 @@ class YaUploader:
         response = requests.get(upload_url, headers=headers, params=params)
         return response.json()
 
+    def put_new_folder(self, name):
+        url
+
+
     def upload(self, file_path: str):
         file = file_path.split('/')[-1]
         href = self.get_upload_link(file=file).get("href", "")

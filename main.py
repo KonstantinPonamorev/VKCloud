@@ -65,10 +65,10 @@ class VkUser:
             json.dump(result_file, file)
 
 
-NewUser = VkUser(token)
 
-info = NewUser.sort_photos_info()
-pprint(info)
+
+
+NewUser = VkUser(token)
 
 NewUser.download_photos()
 
